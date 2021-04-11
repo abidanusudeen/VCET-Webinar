@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Velammal Webinar Series</title>
+		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+		<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
+		<style>
+			/*   RESET STYLESHEET   */
+			html,body,div,p,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent;}
+			body{line-height:1;}
+			article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;}
+			nav ul, ul, li{list-style:none;}
+			img {pointer-events:none;}
+			blockquote,q{quotes:none;}
+			blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
+			a{margin:0;padding:0;color:#FFF;font-size:100%;vertical-align:baseline;background:transparent;text-decoration:none;}
+			ins{background-color:#FF9;color:#111;text-decoration:none;}
+			mark{background-color:#FF9;color:#111;font-style:italic;font-weight:bold;}
+			del{text-decoration:line-through;}
+			abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help;}
+			table{border-collapse:collapse;border-spacing:0;}
+			hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding: 0;}
+			input,select{vertical-align:middle;}
+			/*   MY CODE   */
+			html { scroll-behavior: smooth; }
+			* { outline: none; font-size: 14px; font-weight: 580; text-decoration: none; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+			body { width: 100%; user-select: none; }
+			header, footer {
+				background-size: cover;
+				background-repeat: no-repeat;
+				background-image: url("https://dl.dropbox.com/s/y770zmrc01depcy/header_bg.png?dl=0");
+			}
+			main {
+				color: #FFF;
+				background: #336;
+				border-top: 2px solid #00F;
+				border-bottom: 2px solid #00F;
+			}
+			/*   NAV BAR   */
+			nav {
+				width: 100%;
+				height: 60px;
+				border-bottom: 2px solid #00F;
+			}
+			/*   NAV BUTTON   */
+			.nav-btn {
+				width: 100%;
+				display: none;
+				font-size: 30px;
+				margin: 14px auto;
+				text-align: center;
+			}
+			.nav-btn i {
+				color: #FFF;
+				cursor: pointer;
+				background: #00F;
+				text-align: center;
+				padding: 5px 7.5px;
+			}
+			.nav-btn:hover i.show:before { content: '\f00d'; }
+			/*   NAV LINKS   */
+			nav ul { float: right; }
+			nav ul li { display: inline-block; }
+			nav ul li a {
+				color: #FFF;
+				font-size: 16px;
+				line-height: 58px;
+				padding: 20px 15px;
+			}
+			nav ul li a:hover, nav ul li a:active {
+				background: #00F;
+				transition: 0.25s;
+			}
+			/*   GRID FOR HEADER   */
+			.headerGrid {
+				display: grid;
+				grid-template-columns: 1.3fr 7.4fr 1.3fr;
+			}
+			.headerGrid img { width: 100%; display: block; }
+			.box-1, .box-2, .box-3 { margin: auto 0; }
+			.center { text-align: center; }
+			/*   FONT SIZING & STYLING   */
+			.s { font-size: 18px; font-weight: 300; } .m { font-size: 24px; } .l { font-size: 36px; font-weight: 700; }
+			.head-1 {
+				color: #900;
+				font-size: 23px;
+				text-shadow: 1px 1px 1px #900;
+			}
+			.head-2 {
+				color: #006;
+				font-size: 20px;
+				text-shadow: 1px 1px 1px #006;
+			}
+			.head-3 {
+				color: #009;
+				font-size: 15px;
+				text-shadow: 1px 0.5px 1px #009;
+			}
+			/*   MAIN HEADING TEXT SHADOW   */
+			.main-head { color: lightgreen; font-weight: 900; text-shadow: 2px 2px 1px green; }
+			/*   WRAPPER   */
+			.wrapper { width: 92.5%; margin: 0 auto; } .margin-1 { margin: 10px 5px; } .margin-2 { padding: 20px 0; } .margin-3 { padding: 40px 0; } .fit { margin: 0 auto; width: fit-content; }
+			/*   TOPIC FONT   */
+			.topic {
+				padding: 10px;
+				font-weight: 900;
+				border-radius: 20px;
+				background-color: #C93;
+				border: 2px solid #111;
+			}
+			/*   PROFILE GRIDS   */
+			.profileGrid {
+				display: grid;
+				grid-gap: 60px 20px;
+				grid-template-columns: repeat(4, 1fr);
+			}
+			/*   SINGLE PROFILE   */
+			.singleProfile {
+				display: flex;
+				position: relative;
+				border-radius: 22px;
+				border: 2px solid #111;
+				flex-direction: column;
+			}
+			/*   PROFILE IMAGE   */
+			.singleProfile img {
+				width: 100%;
+				display: block;
+				border-top-left-radius: 20px;
+				border-bottom: 2px solid #111;
+				border-top-right-radius: 20px;
+			}
+			/*   DATE OF SEMINAR   */
+			.date {
+				left: 50%;
+				top: -40px;
+				color: #111;
+				background: #F36;
+				padding: 5px 10px;
+				width: fit-content;
+				position: absolute;
+				text-align: center;
+				border-radius: 20px;
+				border: 1px solid #111;
+				transform: translateX(-50%);
+			}
+			.date p {
+				color: #FFF;
+				font-size: 16px;
+			}
+			.date p sup {
+				font-size: 12px;
+				vertical-align: super;
+			}
+			/*   PROFILE BODY BACKGROUND   */
+			.bg {
+				flex: 1;
+				display: flex;
+				background: #F36;
+				flex-direction: column;
+				border-bottom-left-radius: 20px;
+				border-bottom-right-radius: 20px;
+			}
+			/*   PROFILE HOVER   */
+			.singleProfile:hover > .bg { background:#09F; }
+			.singleProfile:hover > .date { background:#09F; }
+			/*   NAME & JOB   */
+			.body, .footer {
+				flex: 0.5;
+				padding: 5px;
+				display: flex;
+				align-items: center;
+				flex-direction: column;
+				justify-content: center;
+			}
+			.body {
+				color: #606;
+				text-align: center;
+				border-bottom: 2px solid #111;
+			}
+			.job, .bio { margin-top: 5px; }
+			/*   SEMINAR TOPIC   */
+			.seminar { color: #FFF; text-align: center; }
+			/*   ORGANIZER DETAILS   */
+			.organizers {
+				padding: 0 20px;
+				width: fit-content;
+				margin-bottom: 30px;
+			}
+			.name { font-weight: 700; padding: 15px 10px 5px 10px; }
+			.des { padding: 0 10px 10px 10px; }
+			/*   REGISTER BUTTON   */
+			#reg-btn {
+				color: #111;
+				margin: 0 auto;
+				font-size: 16px;
+				cursor: pointer;
+				font-weight: 700;
+				padding: 10px 20px;
+				width: fit-content;
+				border-radius: 25px;
+				border: 2px solid #39C;
+				background: linear-gradient(to right, #3FF, #366);
+			}
+			#reg-btn:hover {
+				font-size: 18px;
+				border: 2px solid #3C6;
+				background: linear-gradient(to right, #9F9, #090);
+			}
+			/*   FORM STYLING   */
+			#reg-form {
+				display: none;
+				padding: 30px 0;
+			}
+			.form-container {
+				width: 560px;
+				margin: 0 auto;
+				background: #111;
+				position: relative;
+			}
+			.form-container form {
+				color: #FFF;
+				padding: 20px;
+				text-align: center;
+			}
+			/*   FORM HEADING & FOOTER   */
+			.form-head {
+				width: 100%;
+				font-size: 24px;
+				text-decoration: underline;
+			}
+			.form-foot {
+				width: 100%;
+				font-size: 16px;
+				margin-top: 20px;
+			}
+			/*   INPUT DIVS   */
+			.divs {
+				padding-top: 10px;
+				position: relative;
+			}
+			.input, .send{
+				font-size: 16px;
+				transition: 0.25s;
+				text-align: center;
+				padding: 10px 20px;
+				border-radius: 20px;
+				border: 2px solid #39C;
+			}
+			textarea { height: 102px; }
+			.input {
+				width: 70%;
+				color: #FFF;
+				background: none;
+			}
+			.input:focus {
+				width: 100%;
+				border: 2px solid #3C6;
+			}
+			/*   SUBMIT BUTTON   */
+			.send {
+				width: 60%;
+				font-weight: 700;
+				cursor: pointer;
+				background-image: linear-gradient(to right, #3FF, #366);
+			}
+			.send:hover, .send:focus {
+				border: 2px solid #3C6;
+				background-image: linear-gradient(to right, #9F9, #090);
+			}
+			/*   ABOUT US   */
+			footer p { font-size: 16px; font-weight: 600; text-align: center; }
+			.contact-head { font-size: 18px; font-weight: 700; padding: 20px 0 0 0; text-decoration: underline; }
+			.contact { display: flex; }
+			.contact div { flex-basis: 50%; }
+			footer a { color: #00F; }
+			.top-border { border-top: 2px solid #00F; }
+			/*   RESPONSIVE LAYOUT   */
+			@media only screen and (max-width: 900px) {
+				.s { font-size: 16px; } .m { font-size: 20px; } .l { font-size: 28px; }
+				.profileGrid { grid-template-columns: repeat(2, 1fr); }
+			}
+			@media only screen and (max-width: 600px) {
+				nav { height: 70px; }
+				.nav-btn { display: inline-block; }
+				nav ul {
+					top: -100%;
+					width: 100%;
+					background: #336;
+					position: absolute;
+					text-align: center;
+					transition: all 0.75s;
+					background-size: cover;
+					border-bottom: 2px solid #00F;
+					background-image: url("https://dl.dropbox.com/s/y770zmrc01depcy/header_bg.png?dl=0");
+				}
+				nav ul.show { top: 70px; }
+				nav ul li {
+					width: 100%;
+					display: block;
+				}
+				nav ul li a {
+					width: 100%;
+					padding: 0 0;
+					line-height: 35px;
+					display: inline-block;
+				}
+				nav ul li a:hover { background: #00F; }
+				.headerGrid { grid-template-columns: 0 1fr 0; }
+				.box-1, .box-3 { top: 0; position: absolute; }
+				.box-1 { left: 5px; } .box-3 { right: 5px; }
+				.headerGrid img { height: 68px; width: 68px; }
+				.box-2 { grid-column-start: 1; grid-column-end: 4; grid-row-start: 1; grid-row-end: 3; }
+				#reg-form { margin-bottom: 0px; }
+				.form-container { width: 100%; }
+				.input { width: 80%; }
+			}
+			@media only screen and (max-width: 450px) {
+				.xs { font-size: 12px; } .s { font-size: 14px; } .m { font-size: 16px; } .l { font-size: 20px; }
+				.profileGrid { grid-template-columns: repeat(1, 1fr); }
+				.input { width: 90%; }
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<!--   NAV BAR   -->
+			<nav>
+				<div class="nav-btn">  <i class="fa fa-align-justify"></i>  </div>
+				<ul>
+					<li>  <a id="navClick" href="VCET.html">HOME</a>  </li>
+					<li>  <a id="navClick" href="https://vcet.ac.in/vcetit/it_about.html" target="_blank">ABOUT COLLEGE</a>  </li>
+					<li>  <a id="navClick" href="https://vcet.ac.in/vcetit/ece.html" target="_blank">ABOUT DEPARTMENT</a>  </li>
+					<li>  <a id="navClick" href="#contact">CONTACT</a>  </li>
+				</ul>
+			</nav>
+			<!--   HEADER GRIDS   -->
+			<div class="headerGrid">
+				<!--   COLLEGE LOGO   -->
+				<div class="box-1">  <img src="https://dl.dropbox.com/s/qrbwwb53hm55n9g/c_logo.png">  </div>
+				<!--   COLLEGE HEADER   -->
+				<div class="center box-2">
+					<h1 class="margin-1 m head-1">VELAMMAL COLLEGE OF <br> ENGINEERING & TECHNOLOGY</h1>
+					<h1 class="margin-1" style="color: #900; text-shadow: 1px 1px #900">MADURAI - 625 009</h1>
+					<h2 class="margin-1 s head-2">Department of Electronics & Communication Engineering</h2>
+					<h3 class="margin-1 xs head-3">(Accredited by NBA and NAAC with 'A' grade)</h3>
+				</div>
+				<!--   VELAMMAL LOGO   -->
+				<div class="box-3">  <img src="https://dl.dropbox.com/s/vtjni5rwdfgww6i/v_logo.png">  </div>
+			</div>
+		</header>
+		<main>
+			<div class="wrapper">
+				<!--   EVENT DETAILS   -->
+				<div class="center margin-2">
+					<h1 class="margin-1 l main-head">VELAMMAL WEBINAR SERIES</h1>
+					<h3 class="margin-1 xs">ON</h3>
+					<div class="fit">  <p class="topic s" style="font-size: 16px">  <strong style="color: #639; font-weight: 900">" Revolutionary Challenges in Computational Intelligence Research and Impact on COVID'19 Pandemic "</strong>  </p>  </div>
+					<h2 class="margin-1" style="font-size: 19px">June 8 to June 11, 2020  <br><br>  <strong style="font-size: 17px">(10:30 am to 12:00 noon)</strong>  </h2>
+					<!--   REGISTER BUTTON   -->
+					<div id="parent" class="margin-2">  <a id="reg-btn" href="#reg-form">CLICK TO REGISTER</a>  </div>
+				</div>
+				<!--   PROFILE GRIDS   -->
+				<div class="profileGrid margin-3">
+					<!--   D JUDE HEMANTH PROFILE   -->
+					<div class="singleProfile">
+						<img src="https://dl.dropbox.com/s/9mlr818pqrppyiw/r_jude_hemanth.jpg?dl=0">
+						<div class="date">  <p>8<sup>th</sup> JUNE, 2020</p>  </div>
+						<div class="bg">
+							<div class="body">
+								<h2 class="s" style="font-weight: 800">Dr. D JUDE HEMANTH</h2>
+								<h3 class="job" style="font-weight: 800">ASSOCIATE PROFESSOR / ECE</h3>
+								<div class="bio" style="font-weight: 800">Karunya Institute of Technology & Sciences, Coimbatore</div>
+							</div>
+							<div class="footer">  <p class="seminar">Deep Learning & Transfer Learning Techniques for COVID-19 Detection from Lung Image</p>  </div>
+						</div>
+					</div>
+					<!--   P DHIVYA PROFILE   -->
+					<div class="singleProfile">
+						<img src="https://dl.dropbox.com/s/x3sy36347zr1wa5/p_dhivya.jpg?dl=0">
+						<div class="date">  <p>9<sup>th</sup> JUNE, 2020</p>  </div>
+						<div class="bg">
+							<div class="body">
+								<h2 class="s" style="font-weight: 800">Mrs. P DHIVYA</h2>
+								<h3 class="job" style="font-weight: 800">RESEARCH SCHOLAR / ECE</h3>
+								<div class="bio" style="font-weight: 800">Velammal College of Engg & Tech</div>
+							</div>
+							<div class="footer">  <p class="seminar">Machine Learning to Deep Learning & Applications for COVID-19 Pandemic</p>  </div>
+						</div>
+					</div>
+					<!--   G VEERA SENTHIL KUMAR PROFILE   -->
+					<div class="singleProfile">
+						<img src="https://dl.dropbox.com/s/dmnqj3rz3otkosq/g_veera_senthil_kumar.jpg?dl=0">
+						<div class="date">  <p>10<sup>th</sup> JUNE, 2020</p>  </div>
+						<div class="bg">
+							<div class="body">
+								<h2 class="s" style="font-weight: 800">Dr. G VEERA SENTHIL KUMAR</h2>
+								<h3 class="job" style="font-weight: 800">ASSOCIATE PROFESSOR / ECE</h3>
+								<div class="bio" style="font-weight: 800">Velammal College of Engg & Tech, Madurai</div>
+							</div>
+							<div class="footer">  <p class="seminar">Hyperspectral Image Analysis for Biomedical Applications</p>  </div>
+						</div>
+					</div>
+					<!--   A ARULMURUGAN PROFILE   -->
+					<div class="singleProfile">
+						<img src="https://dl.dropbox.com/s/spwpl1fjsuwqye7/a_arulmurugan.jpg?dl=0">
+						<div class="date">  <p>11<sup>th</sup> JUNE, 2020</p>  </div>
+						<div class="bg">
+							<div class="body">
+								<h2 class="s" style="font-weight: 800">Dr. A ARULMURUGAN</h2>
+								<h3 class="job" style="font-weight: 800">SCIENTIST</h3>
+								<div class="bio" style="font-weight: 800">Agency for Science, Technology, & Research (A*STAR), Singapore</div>
+							</div>
+							<div class="footer">  <p class="seminar">Hybrid Deep Reinforced Regression Framework for Cardio-Thoracic Ratio Measurement</p>  </div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--   ORGANIZER DETAILS   -->
+			<div class="organizers">
+				<p class="xs">Chief Patron:</p>
+				<p class="name m">Shri. M V MUTHURAMALINGAM</p>
+				<p class="des s">Chairman</p>  <br>
+				<p class="xs">Patrons:</p>
+				<p class="name m">Shri. GANESH NATARAJAN</p>
+				<p class="des s">Vice-Chairman</p>
+				<p class="name m">Dr. N SURESH KUMAR</p>
+				<p class="des s">Principal</p>  <br>
+				<p class="xs">Convener:</p>
+				<p class="name m">Dr. S VASUKI</p>
+				<p class="des s">Prof and Head/ECE</p>  <br>
+				<p class="xs">Coordinators:</p>
+				<p class="name m">Dr. K KAVITHA</p>
+				<p class="des s">Professor/ECE</p>
+				<p class="name m">Mr. A SUBAN</p>
+				<p class="des s">Asst Prof/ECE</p>
+			</div>
+			<div id="reg-form">
+				<!--   REGISTRATION FORM   -->
+				<div class="form-container">
+					<form name="submit-to-google-sheet">
+						<h1 class="form-head">ENTER YOUR DETAILS</h1>
+						<div class="divs">  <input class="input" type="text" name="name" placeholder="FULL NAME" required>  </div>
+						<div class="divs">  <input class="input" type="tel" name="phone" placeholder="PHONE NUMBER" pattern="[0-9]{10}" title="Enter a valid 10 digit number" required>  </div>
+						<div class="divs">  <input class="input" type="email" name="email" placeholder="EMAIL ID" required>  </div>
+						<div class="divs">  <input class="input" type="text" name="designation" placeholder="DESIGNATION" required>  </div>
+						<div class="divs">  <textarea class="input" type="text" name="address" placeholder="ADDRESS" required></textarea>  </div>
+						<div class="divs">  <input class="input" type="text" name="college" placeholder="COLLEGE NAME" required>  </div>
+						<div class="divs">  <button class="send" type="submit">REGISTER</button>  </div>
+						<h1 class="form-foot">REGISTRATION FREE  <br>  E-CERTIFICATES WILL BE PROVIDED</h1>
+					</form>
+				</div>
+			</div>
+		</main>
+		<footer>
+			<!--   CONTACT DETAILS   -->
+			<p id="contact" class="wrapper contact-head">For Further Details Contact</p>
+			<div class="wrapper margin-2 contact">
+				<div>
+					<p>8778782960</p>  <br>
+					<p>sbn@vcet.ac.in</p>
+				</div>
+				<div>
+					<p>6374330382</p>  <br>
+					<p>kavi@vcet.ac.in</p>
+				</div>
+			</div>
+			<!--   ABOUT US   -->
+			<div class="top-border">
+				<div class="wrapper margin-2">
+					<p>© 2020.All Rights Reserved</p>  <br>
+					<p>Designed by  <a href="https://www.instagram.com/abid._.mohamed/" target="_blank">Abid</a> || <a href="https://www.instagram.com/eagerscorpion/" target="_blank">Srinath</a> || <a href="https://www.instagram.com/_viswa_20/" target="_blank">Viswa</a>  <br><br>  VCET-ECE</p>
+				</div>
+			</div>
+		</footer>
+		<script src="https://wzrd.in/standalone/formdata-polyfill"></script>
+		<script src="https://wzrd.in/standalone/promise-polyfill@latest"></script>
+		<script src="https://wzrd.in/standalone/whatwg-fetch@latest"></script>
+		<script>
+			$('.nav-btn').click(function() { showNav(); });
+			$('nav ul li a').click(function() { showNav(); });
+			function showNav() {
+				$('nav ul').toggleClass("show");
+				$('.nav-btn i').toggleClass("show");
+			}
+			$('#reg-btn').click(function() { showForm(); })
+			function showForm() {
+				document.getElementById('reg-form').style.display = 'block';
+			}
+			$('button').click(function() { alert('Your form has been submitted. Thank you for registering'); });
+			const scriptURL = 'https://script.google.com/macros/s/AKfycbxyp39Gnr4LREjUwpeSseSosF88f1g9gkerJS_AfrEyu4YU4VBF/exec'
+			const form = document.forms['submit-to-google-sheet']
+			form.addEventListener('submit', e => {
+				e.preventDefault()
+				fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+				.then(response => console.log('Success!', response))
+				.catch(error => console.error('Error!', error.message))
+			});
+		</script>
+	</body>
+</html>
